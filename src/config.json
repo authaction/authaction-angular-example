@@ -1,0 +1,6 @@
+{
+    "tenantDomain": "your-tenant-domain",
+    "clientId": "your-client-id",
+    "redirectUri": "http://localhost:4200/",
+    "logoutRedirectUri": "http://localhost:4200/"
+}

@@ -227,6 +227,19 @@
       </svg>
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
+
+      <!-- Display user information when logged in -->
+      <div *ngIf="isLoggedIn">
+        <p>Welcome, {{ userEmail }}!</p>
+      </div>
+
+      <div *ngIf="!isLoggedIn">
+        <button (click)="login()">Login</button>
+      </div>
+      <div *ngIf="isLoggedIn">
+        <button (click)="logout()">Logout</button>
+      </div>
+    
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
