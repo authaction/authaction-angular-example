@@ -14,6 +14,8 @@ export const authCodeFlowConfig: AuthConfig = {
   // URL of the SPA to redirect the user to after login
   redirectUri: AuthActionConfig.redirectUri,
 
+  postLogoutRedirectUri: AuthActionConfig.logoutRedirectUri,
+
   // The SPA's id. The SPA is registerd with this id at the auth-server
   clientId: AuthActionConfig.clientId,
 

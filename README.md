@@ -1,27 +1,93 @@
-# AuthactionAngularExample
+# Angular OAuth2 Integration with Authaction
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7.
+This is a Angular application demonstrating how to integrate OAuth2 authentication using [AuthAction](https://app.authaction.com/) with the `angular-oauth2-oidc` library.
 
-## Development server
+## Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This application showcases how to configure and handle authentication and logout using Authaction’s OAuth2 service. The setup includes:
 
-## Code scaffolding
+- Redirecting users to the login page.
+- Handling successful authentication and displaying user information.
+- Logging out users and redirecting them to the specified logout URL.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Prerequisites
 
-## Build
+Before using this application, ensure you have:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. **Node.js and npm installed**: You can download and install them from [nodejs.org](https://nodejs.org/).
 
-## Running unit tests
+2. **Authaction OAuth2 credentials**: You will need to have the `tenantDomain`, `clientId`, and relevant URIs from your Authaction setup.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation
 
-## Running end-to-end tests
+1. **Clone the repository** (if applicable):
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   ```bash
+   git clone git@github.com:authaction/authaction-angular-example.git
+   cd authaction-angular-example
+   ```
 
-## Further help
+2. **Install dependencies**:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+   ```bash
+   npm install
+   ```
+
+3. **Configure your Authaction credentials**:
+
+   Edit `src/config.json` and replace the placeholders with your Authaction OAuth2 details:
+
+   ```json
+   {
+     "tenantDomain": "your-tenant-domain",
+     "clientId": "your-client-id",
+     "redirectUri": "http://localhost:4200/",
+     "logoutRedirectUri": "http://localhost:4200/"
+   }
+   ```
+
+## Usage
+
+1. **Start the development server**:
+
+   ```bash
+   npm start
+   ```
+
+   This will start the Angular application on `http://localhost:4200`.
+
+2. **Testing Authentication**:
+
+   - Open your browser and navigate to `http://localhost:4200`.
+   - Click the "Login" button to be redirected to the Authaction login page.
+   - After successful login, you will be redirected back to the application with a welcome message showing your email and a "Logout" button.
+   - Click the "Logout" button to be logged out and redirected to the specified logout URL.
+
+## Code Explanation
+
+### Configuration (`src/index.js`)
+
+- **OAuthService Setup**:
+  - Configures the OAuth2 authentication using `angular-oauth2-oidc`.
+  - Sets up `issuer`, `clientId`, `redirectUri`, and `postLogoutRedirectUri` based on the credentials from `config.json`.
+
+### Application Component (`src/App.js`)
+
+- **Login and Logout Handling**:
+  - `login` triggers a redirect to the Authaction login page.
+  - `logout` triggers a redirect to the Authaction logout page.
+  - The application conditionally displays a welcome message and logout button if the user is authenticated. Otherwise, it shows a login button.
+
+## Common Issues
+
+- **Redirects not working**:
+
+  - Ensure that the `redirectUri` and `postLogoutRedirectUri` match the URIs configured in your [AuthAction](https://app.authaction.com/) application settings.
+  - Make sure the application is running on the same port as specified in the `redirectUri`.
+
+- **Network Errors**:
+  - Verify that your network allows traffic to the Authaction servers and that there are no firewall rules blocking the OAuth2 redirects.
+
+## Contributing
+
+Feel free to submit issues or pull requests if you find any bugs or have improvements to suggest.
