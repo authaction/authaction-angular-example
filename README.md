@@ -1,6 +1,6 @@
 # Angular OAuth2 Integration with Authaction
 
-This is a Angular application demonstrating how to integrate OAuth2 authentication using [AuthAction](https://app.authaction.com/) with the `angular-oauth2-oidc` library.
+This is a Angular application demonstrating how to integrate OAuth2 authentication using [AuthAction](https://authaction.com/) with the `angular-oauth2-oidc` library.
 
 ## Overview
 
@@ -82,7 +82,7 @@ Before using this application, ensure you have:
 
 - **Redirects not working**:
 
-  - Ensure that the `redirectUri` and `postLogoutRedirectUri` match the URIs configured in your [AuthAction](https://app.authaction.com/) application settings.
+  - Ensure that the `redirectUri` and `postLogoutRedirectUri` match the URIs configured in your [AuthAction](https://authaction.com/) application settings.
   - Make sure the application is running on the same port as specified in the `redirectUri`.
 
 - **Network Errors**:
