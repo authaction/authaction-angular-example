@@ -6,18 +6,19 @@ import AuthActionConfig from '../config.json';
 
 import { AuthConfig } from 'angular-oauth2-oidc';
 import { CommonModule } from '@angular/common';
+import { environment } from '../environments/environment';
 
 export const authCodeFlowConfig: AuthConfig = {
   // Url of the Identity Provider
-  issuer: `https://${AuthActionConfig.tenantDomain}/`,
+  issuer: `https://${environment.authactionTenantDomain}/`,
 
   // URL of the SPA to redirect the user to after login
-  redirectUri: AuthActionConfig.redirectUri,
+  redirectUri: environment.authactionRedirectUri,
 
-  postLogoutRedirectUri: AuthActionConfig.logoutRedirectUri,
+  postLogoutRedirectUri: environment.authactionLogoutRedirectUri,
 
   // The SPA's id. The SPA is registerd with this id at the auth-server
-  clientId: AuthActionConfig.clientId,
+  clientId: environment.authactionClientId,
 
   responseType: 'code',
 
