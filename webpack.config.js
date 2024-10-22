@@ -4,6 +4,7 @@ module.exports = {
   plugins: [
     new Dotenv({
       path: `./.env.${process.env.NODE_ENV}`,
+      systemvars: true,
     }),
   ],
 };
