@@ -35,7 +35,7 @@ Before using this application, ensure you have:
 
 3. **Configure your Authaction credentials**:
 
-   configure your AuthAction OAuth2 details using environment variables in your .env file
+   configure your AuthAction OAuth2 details using environment variables in your .env.development file
 
    ```bash
    AUTHACTION_TENANT_DOMAIN=your-authaction-tenant-domain
