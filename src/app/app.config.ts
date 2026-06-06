@@ -12,6 +12,7 @@ export const appConfig: ApplicationConfig = {
       domain: environment.authactionDomain,
       clientId: environment.authactionClientId,
       redirectUri: environment.authactionRedirectUri,
+      postLogoutRedirectUri: environment.authactionLogoutRedirectUri,
     }),
   ],
 };
