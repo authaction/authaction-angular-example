@@ -1,10 +1,10 @@
 # Angular OAuth2 Integration with Authaction
 
-This is a Angular application demonstrating how to integrate OAuth2 authentication using [AuthAction](https://authaction.com/) with the `angular-oauth2-oidc` library.
+This is an Angular application demonstrating how to integrate OAuth2 authentication using [AuthAction](https://authaction.com/) with the `@authaction/web-sdk` library.
 
 ## Overview
 
-This application showcases how to configure and handle authentication and logout using Authaction’s OAuth2 service. The setup includes:
+This application showcases how to configure and handle authentication and logout using Authaction's OAuth2 service. The setup includes:
 
 - Redirecting users to the login page.
 - Handling successful authentication and displaying user information.
@@ -35,10 +35,10 @@ Before using this application, ensure you have:
 
 3. **Configure your Authaction credentials**:
 
-   configure your AuthAction OAuth2 details using environment variables in your .env.development file
+   configure your AuthAction OAuth2 details using environment variables in your `.env.development` file
 
    ```bash
-   AUTHACTION_TENANT_DOMAIN=your-authaction-tenant-domain
+   AUTHACTION_DOMAIN=your-authaction-tenant-domain
    AUTHACTION_CLIENT_ID=your-authaction-app-clientid
    AUTHACTION_REDIRECT_URI=http://localhost:4200/
    AUTHACTION_LOGOUT_REDIRECT_URI=http://localhost:4200/
@@ -58,23 +58,23 @@ Before using this application, ensure you have:
 
    - Open your browser and navigate to `http://localhost:4200`.
    - Click the "Login" button to be redirected to the Authaction login page.
-   - After successful login, you will be redirected back to the application with a welcome message showing your email and a "Logout" button.
+   - After successful login, you will be redirected back to the application with a welcome message showing your name and a "Logout" button.
    - Click the "Logout" button to be logged out and redirected to the specified logout URL.
 
 ## Code Explanation
 
-### Configuration (`src/index.js`)
+### Configuration (`src/app/app.config.ts`)
 
-- **OAuthService Setup**:
-  - Configures the OAuth2 authentication using `angular-oauth2-oidc`.
-  - Sets up `issuer`, `clientId`, `redirectUri`, and `postLogoutRedirectUri` based on the credentials from `config.json`.
+- **`provideAuthAction` Setup**:
+  - Registers `@authaction/web-sdk/angular` with the Angular dependency injection system.
+  - Sets up `domain`, `clientId`, `redirectUri`, and `postLogoutRedirectUri` from the environment file (`src/environments/environment.ts`).
 
-### Application Component (`src/App.js`)
+### Application Component (`src/app/app.component.ts`)
 
 - **Login and Logout Handling**:
-  - `login` triggers a redirect to the Authaction login page.
-  - `logout` triggers a redirect to the Authaction logout page.
-  - The application conditionally displays a welcome message and logout button if the user is authenticated. Otherwise, it shows a login button.
+  - `login()` calls `AuthActionService.loginWithRedirect()` to redirect the user to the Authaction login page.
+  - `logout()` calls `AuthActionService.logout()` to end the session.
+  - The template uses `isAuthenticated$`, `isLoading$`, and `user$` observables to conditionally display a welcome message and logout button or a login button.
 
 ## Common Issues
 
