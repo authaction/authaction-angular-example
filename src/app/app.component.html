@@ -1,25 +1,72 @@
-<main class="main">
-  <div class="content">
-    <div class="left-side">
-      <h1>AuthAction Angular Example</h1>
+<div class="page">
+  <div class="card">
 
-      <ng-container *ngIf="isLoading$ | async">
-        <p>Loading...</p>
-      </ng-container>
-
-      <ng-container *ngIf="!(isLoading$ | async)">
-        <ng-container *ngIf="isAuthenticated$ | async; else loggedOut">
-          <p>Welcome, {{ (user$ | async)?.name }}!</p>
-          <p>Email: {{ (user$ | async)?.email }}</p>
-          <button (click)="logout()">Logout</button>
-        </ng-container>
-
-        <ng-template #loggedOut>
-          <button (click)="login()">Login</button>
-        </ng-template>
-      </ng-container>
+    <!-- Header -->
+    <div class="card-header">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="6" fill="#6366f1"/>
+          <path d="M7 17L12 7L17 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 13H15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-name">AuthAction</span>
+      </div>
+      <span class="badge">Angular</span>
     </div>
+
+    <!-- Loading -->
+    <ng-container *ngIf="isLoading$ | async">
+      <div class="state-body">
+        <div class="spinner"></div>
+        <p class="state-hint">Restoring session…</p>
+      </div>
+    </ng-container>
+
+    <!-- Authenticated -->
+    <ng-container *ngIf="!(isLoading$ | async)">
+      <ng-container *ngIf="isAuthenticated$ | async; else loggedOut">
+
+        <div class="state-body">
+          <div class="avatar">{{ (user$ | async)?.name | initials }}</div>
+          <div class="user-info">
+            <p class="user-name">{{ (user$ | async)?.name }}</p>
+            <p class="user-email">{{ (user$ | async)?.email }}</p>
+          </div>
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            Authenticated
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <button class="btn btn-secondary" (click)="logout()">Sign out</button>
+        </div>
+
+      </ng-container>
+
+      <!-- Logged out -->
+      <ng-template #loggedOut>
+        <div class="state-body">
+          <div class="lock-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.75"/>
+              <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="state-title">Welcome back</p>
+          <p class="state-hint">Sign in to your account to continue</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-primary" (click)="login()">Sign in with AuthAction</button>
+        </div>
+      </ng-template>
+    </ng-container>
+
   </div>
-</main>
+
+  <p class="footer-note">
+    Secured by <a href="https://authaction.com" target="_blank" rel="noopener">AuthAction</a>
+  </p>
+</div>
 
 <router-outlet />
