@@ -14,8 +14,8 @@
       <span class="badge">Angular</span>
     </div>
 
-    <!-- Loading -->
-    <ng-container *ngIf="isLoading$ | async">
+    <!-- Loading (also covers the initial null before isLoading$ emits) -->
+    <ng-container *ngIf="(isLoading$ | async) !== false">
       <div class="state-body">
         <div class="spinner"></div>
         <p class="state-hint">Restoring session…</p>
@@ -23,7 +23,7 @@
     </ng-container>
 
     <!-- Authenticated -->
-    <ng-container *ngIf="!(isLoading$ | async)">
+    <ng-container *ngIf="(isLoading$ | async) === false">
       <ng-container *ngIf="isAuthenticated$ | async; else loggedOut">
 
         <div class="state-body">
