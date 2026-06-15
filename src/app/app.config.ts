@@ -13,6 +13,7 @@ export const appConfig: ApplicationConfig = {
       clientId: environment.authactionClientId,
       redirectUri: environment.authactionRedirectUri,
       postLogoutRedirectUri: environment.authactionLogoutRedirectUri,
+      cacheLocation: 'localstorage',
     }),
   ],
 };
