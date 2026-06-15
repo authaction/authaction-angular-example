@@ -11,12 +11,14 @@
       <span class="navbar-title">AuthAction</span>
     </div>
     <div class="navbar-actions">
+      <span class="demo-badge">Demo App</span>
+      <span class="badge">Angular</span>
       <ng-container *ngIf="(isLoading$ | async) === false">
         <ng-container *ngIf="isAuthenticated$ | async; else guestNav">
+          <div class="avatar-sm">{{ (user$ | async)?.name | initials }}</div>
           <button class="btn btn-ghost" (click)="logout()">Sign out</button>
         </ng-container>
         <ng-template #guestNav>
-          <span class="demo-badge">Demo App</span>
           <button class="btn btn-ghost" (click)="login()">Log in</button>
           <button class="btn btn-primary btn-sm" (click)="signup()">Sign up</button>
         </ng-template>
